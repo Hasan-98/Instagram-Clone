@@ -2,12 +2,21 @@ const express = require('express')
 
 const app = express()
 const PORT = 5000
-
-
+const mongoose = require('mongoose')
+const {MONGOURI} = require('./key')
 const customerMiddleware = (req , res  , next)=>{
     console.log('Middle ware executed')
     next()
 }
+
+mongoose.connect(
+    MONGOURI)
+mongoose.connection.on('connected', ()=>{
+    console.log('Connected to MongoDb')
+})
+mongoose.connection.on('Error', (err)=>{
+    console.log('Error connected to MongoDb', err)
+})
 
 
 
