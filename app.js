@@ -1,11 +1,13 @@
-const express = require('express')
+const express = require('express') ,  bodyParser = require('body-parser');
 
 const app = express()
 const PORT = 5000
 const mongoose = require('mongoose')
 const {MONGOURI} = require('./key')
 require('./models/user')
-
+app.use(express.json())
+app.use(bodyParser.json());
+app.use(require('./routes/auth'))
 
 
 mongoose.connect(MONGOURI)
